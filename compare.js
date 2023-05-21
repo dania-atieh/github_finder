@@ -38,7 +38,7 @@ input.addEventListener("keyup", (e) => {
           var git_name = document.getElementById("name");
           var location = document.getElementById("location");
 
-          if (data.name === null)  git_name.remove();
+          if (data.name === null) git_name.remove();
 
           if (data.location === null) location.remove();
         } else {
@@ -73,23 +73,26 @@ input.addEventListener("keyup", (e) => {
           battle_button = document.getElementById("battle_button");
 
           battle_button.onclick = function () {
-            if (playerOne > playerTwo) {
-              firstCol.insertAdjacentHTML("afterbegin", "<h3>Winner!</h3>");
-              secCol.insertAdjacentHTML("afterbegin", "<h3>Loser</h3>");
+            var result1 = document.getElementById("result1")
+            var result2 = document.getElementById("result2")
+
+            if (playerOne > playerTwo && result1 == null && result2 == null) {
+              firstCol.insertAdjacentHTML("afterbegin", "<h3 id='result1'>Winner!</h3>");
+              secCol.insertAdjacentHTML("afterbegin", "<h3 id='result2'>Loser</h3>");
             } else {
-              if (playerOne != playerTwo) {
-                firstCol.insertAdjacentHTML("afterbegin", "<h3>Loser</h3>");
-                secCol.insertAdjacentHTML("afterbegin", "<h3>Winner!</h3>");
+              if (playerOne != playerTwo && result1 === null && result2 === null) {
+                firstCol.insertAdjacentHTML("afterbegin", "<h3 id='result1'>Loser</h3>");
+                secCol.insertAdjacentHTML("afterbegin", "<h3 id='result2'>Winner!</h3>");
               }
             }
 
-            if (playerOne == playerTwo) {
-              firstCol.insertAdjacentHTML("afterbegin", "<h3>Tie!</h3>");
-              secCol.insertAdjacentHTML("afterbegin", "<h3>Tie!</h3>");
+            if (playerOne == playerTwo && result1 === null && result2 === null) {
+              firstCol.insertAdjacentHTML("afterbegin", "<h3 id='result1'>Tie!</h3>");
+              secCol.insertAdjacentHTML("afterbegin", "<h3 id='result2'>Tie!</h3>");
             }
           };
         } //end else
       }) //end of user_api
-      .catch( error => console.error(error));
+      .catch((error) => console.error(error));
   } //end of if (button == enter)
 }); //end of keyup
